@@ -19,14 +19,9 @@ const unsigned long debounceDelay = 50;
 const int SRF02_ADDR = 112;
 
 // ✅ Updated calibration table
-const int calibPotVals[] = {
-  1023, 950, 900, 850, 800, 700,
-  600, 500, 450, 400, 350, 300
-};
-const float calibDistances[] = {
-  93.5, 96, 105, 107, 111, 116,
-  112, 102.5, 88, 75.5, 68, 47.5
-};
+const int calibPotVals[] = { 300, 350, 400, 450, 500, 600, 700, 800, 850, 900, 950, 1023 };
+const float calibDistances[] = {47.5, 68, 75.5, 88, 102.5, 112, 116, 111, 107, 105, 96, 93.5 };
+
 const int tableSize = sizeof(calibPotVals) / sizeof(calibPotVals[0]);
 
 void setup() {
@@ -65,8 +60,8 @@ void loop() {
       Serial.print(distance);
       Serial.println(" cm");
 
-      // 2. Find closest potentiometer value
-      int potVal = getClosestPotValue(distance);
+      // 2. Find potentiometer value
+      int potVal = getPotValue(distance);
       Serial.print("Chosen potentiometer value: ");
       Serial.println(potVal);
 
@@ -129,4 +124,21 @@ int getClosestPotValue(float measuredDistance) {
     }
   }
   return closestPot;
+}
+
+// Finds the potentiometer value by linear interpolation
+int getPotValue(float measuredDistance) {
+  for (int i = 0; i < tableSize - 1; i++) {
+    float distanceMin = calibDistances[i];
+    float distanceMax = calibDistances[i + 1];
+
+    float potiMin = calibPotVals[i];
+    float potiMax = calibPotVals[i + 1];
+
+    if (distanceMin <= measuredDistance < distanceMax) {
+      return map(measuredDistance, distanceMin, distanceMax, potiMin, potiMax);
+    }
+  }
+
+  return 0;
 }
