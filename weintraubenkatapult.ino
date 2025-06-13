@@ -79,7 +79,15 @@ void loop() {
         automaticLaunchButtonCurrState = reading;
     }
 
+    reading = digitalRead(manualLaunchButtonPin);
+    if (reading != automaticLaunchButtonPrevState) {
+        lastDebounceTime = millis();
+        manualLaunchButtonCurrState = reading;
+    }
+
     if ((millis() - lastDebounceTime) > debounceDelay) {
+        setStrengthPotentiometer()
+
         if (automaticLaunchButtonCurrState == LOW && automaticLaunchButtonPrevState == HIGH) {
             digitalWrite(manualModePin, LOW);
             executeAutomaticMode(); // Trigger the automatic sequence
