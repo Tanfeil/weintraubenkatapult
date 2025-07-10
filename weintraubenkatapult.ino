@@ -4,14 +4,14 @@
 #include "manual_utils.h"
 
 // Pin definitions
-const int automaticLaunchButtonPin = 7;
-const int manualLaunchButtonPin = 8;
+const int automaticLaunchButtonPin = 11;
+const int manualLaunchButtonPin = 10;
 const int strengthMeterPins[] = {2, 3, 4, 5, 6}; // Strength meter LED pins
-const int outOfRangePin = 13;
-const int readyPin = 10;
-const int automaticModePin = 11;
-const int manualModePin = 12;
-const int strenghtServoPin = 9;
+const int outOfRangePin = 8;
+const int readyPin = 7;
+const int automaticModePin = 12;
+const int manualModePin = 13;
+const int strenghtServoPin = A2;
 const int holdServoPin = A1;
 const int potentiometerPin = A0;
 
