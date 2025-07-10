@@ -61,6 +61,7 @@ void release() {
 int readPotentiometer() {
     // Read the potentiometer value (0-1023)
     int potentiometer_val = analogRead(potentiometerPin);
+    // Serial.println(potentiometer_val);
   
     // Map potentiometer value (0-1023) to servo position (0-180)
     return map(potentiometer_val, 0, 1023, 0, 180);

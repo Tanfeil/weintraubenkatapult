@@ -6,9 +6,9 @@
 // Pin definitions
 const int automaticLaunchButtonPin = 11;
 const int manualLaunchButtonPin = 10;
-const int strengthMeterPins[] = {2, 3, 4, 5, 6}; // Strength meter LED pins
-const int outOfRangePin = 8;
-const int readyPin = 7;
+const int strengthMeterPins[] = {3, 4, 5, 6, 7}; // Strength meter LED pins
+const int outOfRangePin = 2;
+const int readyPin = 8;
 const int automaticModePin = 12;
 const int manualModePin = 13;
 const int strenghtServoPin = A2;
@@ -71,13 +71,14 @@ void loop() {
         if (automaticLaunchButtonCurrState == LOW && automaticLaunchButtonPrevState == HIGH) {
             digitalWrite(manualModePin, LOW);
             executeAutomaticMode(); // Trigger the automatic sequence
-            
+            Serial.println("Automatic");
             digitalWrite(manualModePin, HIGH);
             lastDebounceTime = millis();
         }
 
         if (manualLaunchButtonCurrState == LOW && manualLaunchButtonPrevState == HIGH) {
             executeManualMode(); // Trigger the manual sequence
+            Serial.println("Manual");
             lastDebounceTime = millis();
         }
 

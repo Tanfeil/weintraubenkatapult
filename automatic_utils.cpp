@@ -6,7 +6,8 @@ const int SRF02_ADDR = 112;
 
 // Calibration data
 const int calibPotVals[] = { 300, 350, 400, 450, 500, 600, 700, 800, 850, 900, 950, 1023 };
-const float calibDistances[] = {47.5, 68, 75.5, 88, 102.5, 112, 116, 111, 107, 105, 96, 93.5 };
+const float calibDistances_old[] = {47.5, 68, 75.5, 88, 102.5, 112, 116, 111, 107, 105, 96, 93.5 };
+const float calibDistances[] = {14, 41, 61, 85, 97, 110, 110, 110, 110, 110, 110, 110 };
 const int tableSize = sizeof(calibPotVals) / sizeof(calibPotVals[0]);
 
 
@@ -51,7 +52,7 @@ void executeAutomaticMode() {
     Serial.println(">> Launch triggered!");
 
     // Measure distance and add 5 cm offset
-    int distance = readSRF02() + 5;
+    int distance = readSRF02() + 12;
 
     Serial.print("Adjusted distance (with bowl offset): ");
     Serial.print(distance);
